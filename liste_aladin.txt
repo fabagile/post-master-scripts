@@ -1,0 +1,4 @@
+install_aladin
+install_diwagnosis
+install_recorder
+install_samtec_usb

@@ -1,0 +1,1 @@
+Start-Process "\\files-srv07\logiciels$\\\files-srv07\logiciels$\Gestion de Parc\Logiciels - Drivers - Patchs\Logiciels\Logiciels BUS\LumiStudio – Lumiplan\EndpointBasecamp.exe"

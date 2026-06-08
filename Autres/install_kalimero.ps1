@@ -1,0 +1,1 @@
+Start-Process "\\appli-prod01\appli$\Kalimero\Installation\INSTALL.EXE"

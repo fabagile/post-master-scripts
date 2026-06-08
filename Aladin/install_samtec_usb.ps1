@@ -1,0 +1,1 @@
+Start-Process "\\files-srv07\logiciels$\Gestion de Parc\Logiciels - Drivers - Patchs\Logiciels\Logiciels BUS\Aladin Voith\Version 6-4\ALADIN_6-4\Voith Samtec USB Interface Driver\SetupSamDiaX_6.2.5.0.exe"
