@@ -8,12 +8,14 @@ function Invoke-List {
     [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
     $listfile = ".\liste_{0}.txt" -F $Name
     $funcs = Get-Content -Path $listfile | ForEach-Object { $_.Trim() } | Where-Object { $_ -match '\S' }
-    
+
     $funcs | ForEach-Object {
         $dir = ".\{0}" -F $Name
         # $_
-        $scriptPath = if ($_.Contains(".bat") ) {
-            $dir
+        $bat
+        $scriptPath = if ($_.Contains($bat) ) {
+            $dir2 = $dir.Split($bat)[0 ]
+            Join-Path -Path $dir2 -ChildPath "$.bat"
         }
         else {
             Join-Path -Path $dir -ChildPath "$_.ps1"

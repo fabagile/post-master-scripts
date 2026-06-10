@@ -1,0 +1,1 @@
+& "..\wifi_manager\activate_wifi_energy_manager.bat"

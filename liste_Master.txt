@@ -1,5 +1,5 @@
 update_tsnames
 install_hpia
 configure_chrome
-deactivate_wifi_energy_manager.bat
+deactivate_human_detector
 update_windows
