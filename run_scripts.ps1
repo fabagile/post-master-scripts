@@ -1,4 +1,5 @@
 function Invoke-List {
+    [cmdletbinding()]
     param(
         [parameter(Mandatory = $true)]
         [string]$Name
@@ -11,15 +12,15 @@ function Invoke-List {
 
     $funcs | ForEach-Object {
         $dir = ".\{0}" -F $Name
+        Join-Path -Path $dir -ChildPath "$_.ps1"
         # $_
-        $bat
-        $scriptPath = if ($_.Contains($bat) ) {
-            $dir2 = $dir.Split($bat)[0 ]
-            Join-Path -Path $dir2 -ChildPath "$.bat"
-        }
-        else {
-            Join-Path -Path $dir -ChildPath "$_.ps1"
-        }
+        # $bat
+        # $scriptPath = if ($_.Contains($bat) ) {
+        #     $dir2 = $dir.Split($bat)[0 ]
+        #     Join-Path -Path $dir2 -ChildPath "$.bat"
+        # }
+        # else {
+        # }
 
         "Lancement de {0}" -F $scriptPath
         
