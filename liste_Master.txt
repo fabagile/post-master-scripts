@@ -1,5 +1,6 @@
 update_tsnames
 install_hpia
+install_teams
 configure_chrome
-deactivate_human_detector
+activate_wifi_energy_manager
 update_windows
