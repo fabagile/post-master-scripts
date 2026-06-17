@@ -22,22 +22,48 @@ if ($html -match '(?s)<tbody>(.*?)<\/tbody>') {
         }
         
         # 5. Affichage des résultats
-        # Write-Host "--- Résultats ---" -ForegroundColor Cyan
-        # Write-Host "Version : $version" -ForegroundColor Green
-        # Write-Host "SoftPaq : $softPaq" -ForegroundColor Green
         $versionUrl = "https://hpia.hpcloud.hp.com/downloads/hpia/hp-hpia-{0}.exe" -F $version
         "Telechargement: {0}" -F $versionUrl
         # $versionUrl
         $prog = "C:\temp\hpia-{0}.exe" -F $version
         Invoke-WebRequest -Uri $versionUrl -OutFile $prog 
         "Installation en cours..."
-        Start-Process $prog 
+        Start-Process $prog -Wait
         "Installation terminee"
         Remove-Item -Path $prog -Force
+
+        # 1. Récupérer le nom de l'utilisateur connecté à l'écran
+$loggedUser = (Get-CimInstance Win32_ComputerSystem).UserName.Split('\')[1]
+
+# 2. Récupérer le SID de cet utilisateur pour fouiller dans le Registre HKEY_USERS
+$userSID = (New-Object System.Security.Principal.NTAccount($loggedUser)).Translate([System.Security.Principal.SecurityIdentifier]).Value
+
+# 3. Lire le chemin réel du Bureau directement dans le Registre Windows
+$registryPath = "Registry::HKEY_USERS\$userSID\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"
+$desktopPath = (Get-ItemProperty -Path $registryPath).Desktop
+
+# 4. Construire le chemin complet du raccourci
+$shortcutPath = Join-Path $desktopPath "HPImageAssistant.lnk"
+
+        # 2. Vérifier si le raccourci existe dans la session actuelle
+        if (Test-Path $shortcutPath) {
+            $wshShell = New-Object -ComObject WScript.Shell
+            $shortcut = $wshShell.CreateShortcut($shortcutPath)
+
+            # 3. Mise à jour des champs avec le bon SoftPaq
+            $shortcut.TargetPath = "C:\SWSetup\$softPaq\HPImageAssistant.exe"
+            $shortcut.WorkingDirectory = "C:\SWSetup\$softPaq\"
+
+            # 4. Validation
+            $shortcut.Save()
+
+            Write-Host "Le raccourci de l'utilisateur courant a été mis à jour ($softPaq)." -ForegroundColor Green
+        }
+        else {
+            Write-Host "Raccourci introuvable sur le bureau de cet utilisateur." -ForegroundColor Yellow
+        }
     }
 }
 else {
     Write-Host "Impossible de trouver la balise <tbody> dans la page." -ForegroundColor Red
 }
-# $url = & 
-# https://hpia.hpcloud.hp.com/downloads/hpia/hp-hpia-5.3.6.exe
