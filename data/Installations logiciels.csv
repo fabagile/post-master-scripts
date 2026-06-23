@@ -1,0 +1,7 @@
+﻿Nom;Emplacement;Installateur;Destination;Sous-dossier
+Notepad++;Gestion de Parc\Logiciels - Drivers - Patchs\Logiciels;npp.8.8.3.Installer.x64.exe;;
+FileZilla;Gestion de Parc\Logiciels – Drivers – Patchs\Logiciels\Filezilla;FileZilla_3.68.1_win64-setup.exe;C:\AppliTAN;
+QGIS;Gestion de Parc\Logiciels - Drivers - Patchs\Logiciels\QGIS;QGIS-OSGeo4W-3.34.11-1.msi;;
+WinSCP;Gestion de Parc\Logiciels - Drivers - Patchs\Logiciels;WinSCP-6.1.2-Setup.exe;;
+PDF Creator;Gestion de Parc\Logiciels - Drivers - Patchs\Logiciels\PDF\PDF Creator;PDFCreator-6_1_0-Setup.exe;;
+Nestor;\\appli-prod01\appli$\Nestor\Installation;install.exe;C:\Applis_TAN;Nestor
